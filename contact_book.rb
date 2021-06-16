@@ -8,14 +8,48 @@ class Person
   end
 
   def contact_card
-    puts "-" * 40
     name = "Name: #{@name}\n"
     phone_num = "Phone Number: #{@phone_num}\n"
     email = "Email Address: #{@email}\n"
-    line = "=" * 40
+    line = '=' * 40
     name.concat(phone_num, email, line)
   end
 end
+
+class ContactBook
+  def initialize(name)
+    @name = name
+    @contacts = []
+  end
+
+  def total_contacts
+    @contacts.length
+  end
+
+  def add_contact(name, phone_num, email)
+    person = Person.new(name, phone_num, email)
+    @contacts.push person
+  end
+
+  def view_all_contacts
+    contact_book_name = "Contact Book Name: #{@name}" + "\n"
+    contacts_count = "Contacts Count: #{total_contacts}" + "\n"
+    line = '=' * 40 + "\n"
+    all_contacts = contact_book_name.concat(contacts_count, line)
+    @contacts.each do |contact|
+      all_contacts.concat(contact.contact_card, + "\n")
+    end
+    all_contacts
+  end
+end
+
+# Test - Example
+# ==============
+# book = ContactBook.new 'Family'
+# book.add_contact('Joseph', '016-888 0952', 'joseph@example.com')
+# book.add_contact('Fredrick', '016-238 0909', 'fredrick@example.com')
+# book.add_contact('Anderson', '016-663 0343 ', 'Anderson@example.com')
+# puts book.view_all_contacts
 
 #contact = []
 #contact.push Person.new('Joseph', '016-888 0952', 'joseph@example.com')
